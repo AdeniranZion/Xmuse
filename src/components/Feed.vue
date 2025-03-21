@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 p-4 md:ml-72 bg-gray-50 dark:bg-gray-900 max-w-screen-sm mx-auto">
+  <div class="flex-1 p-4 md:ml-80 bg-gray-50 dark:bg-gray-900 max-w-screen-md mx-auto overflow-hidden">
     <div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
       <div v-for="story in store.stories" :key="story.id" class="flex-shrink-0 w-20 sm:w-28 cursor-pointer">
         <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-1">

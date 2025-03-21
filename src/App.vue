@@ -5,36 +5,47 @@
       <router-view />
     </div>
 
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex justify-around items-center h-16 z-50">
-      <router-link to="/" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/'}">
-        <font-awesome-icon icon="home" class="text-xl" />
-      </router-link>
-      <router-link to="/search" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/search'}">
-        <font-awesome-icon icon="search" class="text-xl" />
-      </router-link>
-      <router-link to="/notifications" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/notifications'}">
-        <font-awesome-icon icon="bell" class="text-xl" />
-      </router-link>
-      <router-link to="/messages" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/messages'}">
-        <font-awesome-icon icon="envelope" class="text-xl" />
-      </router-link>
-      <router-link to="/profile" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/profile'}">
-        <font-awesome-icon icon="user" class="text-xl" />
-      </router-link>
-      <router-link to="/communities" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/community'}">
-        <font-awesome-icon icon="user-group" class="text-xl" />
-      </router-link>
-    </nav>
+    <nav
+  class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex justify-around items-center h-16 z-50 transition-opacity duration-300"
+  :style="{ opacity: navbarOpacity }"
+>
+  <router-link to="/" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/'}">
+    <font-awesome-icon icon="home" class="text-xl" />
+  </router-link>
+  <router-link to="/search" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/search'}">
+    <font-awesome-icon icon="search" class="text-xl" />
+  </router-link>
+  <router-link to="/notifications" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/notifications'}">
+    <font-awesome-icon icon="bell" class="text-xl" />
+  </router-link>
+  <router-link to="/messages" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/messages'}">
+    <font-awesome-icon icon="envelope" class="text-xl" />
+  </router-link>
+  <router-link to="/profile" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/profile'}">
+    <font-awesome-icon icon="user" class="text-xl" />
+  </router-link>
+  <router-link to="/communities" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/community'}">
+    <font-awesome-icon icon="user-group" class="text-xl" />
+  </router-link>
+</nav>
+
 
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Header from './components/Header.vue';
 import { useAppStore } from './store';
 
 const store = useAppStore();
+const navbarOpacity = ref(1); // Initialize opacity value
+
+// Handle scroll to adjust navbar opacity based on scroll position
+const handleScroll = () => {
+  const scrollY = window.scrollY;
+  navbarOpacity.value = scrollY > 50 ? 0.7 : 1; // Reduce opacity after 50px scroll
+};
 
 onMounted(() => {
   const savedTheme = localStorage.getItem('themePreference');
@@ -44,12 +55,18 @@ onMounted(() => {
     } else if (savedTheme === 'light') {
       store.toggleDarkMode(false);
     } else if (savedTheme === 'system') {
-      const prefersDark = typeof window !== 'undefined' && window.matchMedia
-        ? window.matchMedia('(prefers-color-scheme: dark)').matches
-        : false;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       store.toggleDarkMode(prefersDark);
     }
   }
+
+  // Add scroll event listener
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  // Remove scroll event listener to prevent memory leaks
+  window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
