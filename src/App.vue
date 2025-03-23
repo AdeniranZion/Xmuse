@@ -1,41 +1,44 @@
 <template>
-  <div class="flex flex-col bg-gray-50 min-h-screen dark:bg-gray-900">
+  <div class="flex flex-col bg-gray-50 min-h-screen dark:bg-black">
     <Header />
     <div class="flex-1">
       <router-view />
     </div>
 
     <nav
-  class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex justify-around items-center h-16 z-50 transition-opacity duration-300"
-  :style="{ opacity: navbarOpacity }"
->
-  <router-link to="/" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/'}">
-    <font-awesome-icon icon="home" class="text-xl" />
-  </router-link>
-  <router-link to="/search" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/search'}">
-    <font-awesome-icon icon="search" class="text-xl" />
-  </router-link>
-  <router-link to="/notifications" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/notifications'}">
-    <font-awesome-icon icon="bell" class="text-xl" />
-  </router-link>
-  <router-link to="/messages" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/messages'}">
-    <font-awesome-icon icon="envelope" class="text-xl" />
-  </router-link>
-  <router-link to="/profile" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/profile'}">
-    <font-awesome-icon icon="user" class="text-xl" />
-  </router-link>
-  <router-link to="/communities" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/community'}">
-    <font-awesome-icon icon="user-group" class="text-xl" />
-  </router-link>
-</nav>
-
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-800 dark:border-gray-700 flex justify-around items-center h-16 z-50 transition-opacity duration-300"
+      :style="{ opacity: navbarOpacity }"
+    >
+      <router-link to="/" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/'}">
+        <font-awesome-icon icon="home" class="text-xl" />
+      </router-link>
+      <router-link to="/search" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/search'}">
+        <font-awesome-icon icon="search" class="text-xl" />
+      </router-link>
+      <router-link to="/notifications" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/notifications'}">
+        <font-awesome-icon icon="bell" class="text-xl" />
+      </router-link>
+      <router-link to="/messages" class="flex flex-col items-center p-2 relative hover:border-indigo-600 dark:hover:border-indigo-400" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/messages'}">
+        <font-awesome-icon icon="envelope" class="text-xl" />
+        <span v-if="store.hasNewMessage" class="absolute top-1 right-1 w-3 h-3 bg-indigo-600 dark:bg-red-600 dark:border-gray-800 border-2 rounded-full"></span>
+      </router-link>
+      <router-link to="/profile" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/profile'}">
+        <font-awesome-icon icon="user" class="text-xl" />
+      </router-link>
+      <router-link to="/communities" class="flex flex-col items-center p-2" :class="{'text-indigo-600 dark:text-indigo-400': $route.path === '/communities'}">
+        <font-awesome-icon icon="user-group" class="text-xl" />
+      </router-link>
+    </nav>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import Header from './components/Header.vue';
+import { defineAsyncComponent } from 'vue';
+// import Header from './components/Header.vue';
+const Header = defineAsyncComponent(() => import('./components/Header.vue'));
+
 import { useAppStore } from './store';
 
 const store = useAppStore();
@@ -44,7 +47,7 @@ const navbarOpacity = ref(1); // Initialize opacity value
 // Handle scroll to adjust navbar opacity based on scroll position
 const handleScroll = () => {
   const scrollY = window.scrollY;
-  navbarOpacity.value = scrollY > 50 ? 0.7 : 1; // Reduce opacity after 50px scroll
+  navbarOpacity.value = scrollY > 50 ? 0.4 : 1;
 };
 
 onMounted(() => {
@@ -81,7 +84,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh; /* Ensures body takes at least the full viewport height */
-  background-color: #f9fafb; /* Light mode background */
+  /* background-color: #f9fafb; */
   color: #1f2937; /* Default text color */
 }
 

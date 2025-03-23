@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed top-0 w-full shadow-sm z-50 bg-white dark:bg-gray-800">
+  <header class="fixed top-0 w-full shadow-sm z-50 bg-white dark:bg-neutral-900">
     <div class="max-w-[1440px] mx-auto h-16 flex items-center justify-between px-6 md:px-6">
       <!-- Mobile Header -->
       <div class="flex md:hidden w-full justify-between items-center">
@@ -8,10 +8,10 @@
           <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Xmuse</span>
         </div>
         <div class="flex items-center gap-4">
-          <button class="p-2 rounded-full bg-gray-100 dark:bg-gray-700" @click="toggleMobileSearch">
+          <button class="p-2 rounded-full bg-white dark:bg-neutral-900 font-bold" @click="toggleMobileSearch">
             <font-awesome-icon icon="search" class="text-gray-600 dark:text-gray-400" />
           </button>
-          <button class="p-2 rounded-full bg-gray-100 dark:bg-gray-700" @click="toggleMobileMenu">
+          <button class="p-2 rounded-full bg-white dark:bg-neutral-900" @click="toggleMobileMenu">
             <font-awesome-icon icon="bars" class="text-gray-600 dark:text-gray-400" />
           </button>
         </div>
@@ -73,10 +73,10 @@
           <font-awesome-icon icon="bell" class="text-gray-600 dark:text-gray-400" />
           <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 dark:bg-red-600 rounded-full text-white dark:text-gray-100 text-xs flex items-center justify-center">3</span>
         </button>
-        <button class="relative rounded-button cursor-pointer icon-button" @click="store.toggleMessages">
+        <a href="http://localhost:5173/messages" class="relative rounded-button cursor-pointer icon-button">
           <font-awesome-icon icon="envelope" class="text-gray-600 dark:text-gray-400" />
           <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 dark:bg-red-600 rounded-full text-white dark:text-gray-100 text-xs flex items-center justify-center">5</span>
-        </button>
+        </a>
         <div class="relative">
           <div class="w-8 h-8 rounded-full overflow-hidden cursor-pointer profile-button" @click="store.toggleProfileMenu">
             <img :src="store.userProfileImage" class="w-full h-full object-cover" alt="profile" />

@@ -1,7 +1,6 @@
-<!-- right-[calc((100%-1440px)/2)] -->
 <template>
-    <div class="hidden md:block fixed top-30 right-56 w-80 h-[calc(100vh-4rem)] p-4 border-l border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 overflow-y-auto">
-      <div class="bg-gray-50 shadow-sm dark:bg-gray-800 rounded-lg p-3 py-5">
+    <div class="hidden md:block fixed top-30 right-56 w-80 h-[calc(100vh-4rem)] p-4 border-l border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-black overflow-y-auto">
+      <div class="bg-gray-50 shadow-sm dark:bg-neutral-800 rounded-lg p-3 py-5">
         <h3 class="font-semibold mb-4 text-gray-900 dark:text-gray-100">Trending Artists</h3>
         <div class="space-y-4">
           <div v-for="artist in store.trendingArtists" :key="artist.id" class="flex items-center gap-3 cursor-pointer">
@@ -23,7 +22,7 @@
       
       <h3 class="font-semibold mt-8 mb-4 text-gray-900 dark:text-gray-100">Upcoming Events</h3>
       <div class="space-y-4">
-        <div v-for="event in store.upcomingEvents" :key="event.id" class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 cursor-pointer">
+        <div v-for="event in store.upcomingEvents" :key="event.id" class="bg-gray-50 dark:bg-neutral-800 rounded-lg p-3 cursor-pointer">
           <p class="text-sm font-medium text-gray-900 dark:text-gray-100">{{ event.name }}</p>
           <div class="flex items-center gap-2 mt-2 text-sm text-gray-500 dark:text-gray-400">
             <font-awesome-icon icon="calendar-alt" />

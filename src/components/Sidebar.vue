@@ -1,7 +1,7 @@
 <template>
-  <div class="hidden md:block fixed top-15 left-30 w-72 h-full p-4 border-r border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900">
+  <div class="hidden md:block fixed top-15 left-30 w-72 h-full p-4 border-r border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-black">
     <!-- <div class="hidden md:block fixed top-0 left-0 h-full w-72 bg-white dark:bg-gray-900 shadow-lg z-40"> -->
-    <div class="rounded-xl p-4 shadow-sm bg-white dark:bg-gray-800">
+    <div class="rounded-xl p-4 shadow-sm bg-white dark:bg-neutral-800">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-full overflow-hidden">
           <img :src="store.userProfileImage" class="w-full h-full object-cover" alt="profile" />
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <p class="text-sm text-gray-600 dark:text-gray-400">Latest Release</p>
+        <p class="text-sm text-gray-600 dark:text-gray-50">Latest Release</p>
         <div class="mt-2 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
           <div class="flex items-center gap-2">
             <font-awesome-icon icon="play-circle" class="text-indigo-600 dark:text-indigo-400" />

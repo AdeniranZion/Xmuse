@@ -1,15 +1,9 @@
 <template>
-  <div class="flex-1 p-4 md:ml-80 bg-gray-50 dark:bg-gray-900 max-w-screen-md mx-auto overflow-hidden">
-    <div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-      <div v-for="story in store.stories" :key="story.id" class="flex-shrink-0 w-20 sm:w-28 cursor-pointer">
-        <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-1">
-          <img :src="story.image" class="w-full h-full object-cover" alt="story" />
-        </div>
-        <p class="text-xs text-center text-gray-600 dark:text-gray-400">{{ story.name }}</p>
-      </div>
-    </div>
+  <div class="flex-1 p-4 md:ml-80 bg-gray-50 dark:bg-black max-w-screen-md mx-auto overflow-hidden">
+    <!-- <div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
+    </div> -->
 
-    <div class="rounded-xl p-4 mt-4 shadow-sm bg-white dark:bg-gray-800">
+    <div class="rounded-xl p-4 mt-0 shadow-sm bg-white dark:bg-zinc-800">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden">
           <img :src="store.userProfileImage" class="w-full h-full object-cover" alt="profile" />
@@ -36,6 +30,7 @@
       </div>
     </div>
 
+    <!-- Weekly Challenge -->
     <div class="mt-6 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-sm p-4 sm:p-6 text-white">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center space-x-2">
@@ -52,9 +47,9 @@
             :key="index"
             :src="participant.avatar"
             alt=""
-            class="h-6 w-6 sm:h-8 sm:w-8 rounded-full border-2 border-white"
+            class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-white"
           />
-          <div class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white/20 flex items-center justify-center text-sm">
+          <div class="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white/20 flex items-center justify-center text-sm">
             +42
           </div>
         </div>
@@ -64,8 +59,11 @@
       </div>
     </div>
 
+
+    <!-- slate, gray, zinc, neutral, stone -->
+
     <div class="space-y-4 sm:space-y-6 mt-4">
-        <div v-for="post in store.posts" :key="post.id" class="rounded-xl p-4 shadow-sm bg-white dark:bg-gray-800">
+        <div v-for="post in store.posts" :key="post.id" class="rounded-xl p-4 shadow-sm bg-white dark:bg-neutral-950">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full overflow-hidden">
               <img :src="post.userImage" class="w-full h-full object-cover" alt="profile" />
@@ -115,7 +113,7 @@
                   <p class="text-sm text-gray-600 dark:text-gray-400">Comments ({{ post.stats.replies }})</p>
                   <div class="mt-2 space-y-2">
                       <div v-for="comment in post.comments" :key="comment.id" class="flex items-start gap-2">
-                      <div class="w-8 h-8 rounded-full overflow-hidden">
+                      <div class="md:w-8 md:h-8 w-6 h-6 rounded-full overflow-hidden">
                           <img :src="comment.userImage" class="w-full h-full object-cover" alt="commenter" />
                       </div>
                       <div>
@@ -126,7 +124,7 @@
                   </div>
                   <!-- Comment Form -->
                   <form @submit.prevent="submitComment(post.id)" class="mt-4 flex items-center gap-2">
-                      <div class="w-8 h-8 rounded-full overflow-hidden">
+                      <div class="w-8 h-8 rounded-full overflow-hidden hidden md:block">
                       <img :src="store.userProfileImage" class="w-full h-full object-cover" alt="user" />
                       </div>
                       <input

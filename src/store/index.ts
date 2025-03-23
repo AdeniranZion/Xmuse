@@ -280,7 +280,17 @@ export const useAppStore = defineStore('app', {
 
     showMessages: false,
     showProfileMenu: false,
+    hasNewMessage: true, // New property to track if there are new messages
+    showNewMessagePane: false,
+
+    friendsAndFans: [
+      { id: 1, name: 'Alex', handle: '@alexmusic', avatar: 'https://public.readdy.ai/ai/img_res/sample1.jpg' },
+      { id: 2, name: 'Sara', handle: '@sarasinger', avatar: 'https://public.readdy.ai/ai/img_res/sample2.jpg' },
+      { id: 3, name: 'Mike', handle: '@mikeguitar', avatar: 'https://public.readdy.ai/ai/img_res/sample3.jpg' },
+    ],
+    messages: [],
   }),
+
   actions: {
     toggleDarkMode(state?: boolean) {
         this.isDarkMode = state !== undefined ? state : !this.isDarkMode;
@@ -377,6 +387,23 @@ export const useAppStore = defineStore('app', {
           workshops: [],
           challenges: [],
         });
-  },
-}
-});
+      },
+
+    toggleNewMessagePane() {
+      this.showNewMessagePane = !this.showNewMessagePane;
+    },
+  
+    createNewMessage(content: string, recipient?: { name: string; handle: string; avatar?: string }) {
+      const newMessage = {
+        id: this.messages.length + 1,
+        name: recipient ? recipient.name : 'New Message',
+        handle: recipient ? recipient.handle : '@unknown',
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        content,
+        avatar: recipient ? recipient.avatar : 'https://public.readdy.ai/ai/img_res/default.jpg',
+        verified: false,
+      };
+      this.messages.unshift(newMessage);
+    },
+  
+}});

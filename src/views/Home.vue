@@ -8,7 +8,7 @@ const Notifications = defineAsyncComponent(() => import('../components/Notificat
 
 
 <template>
-  <div class="max-w-[1440px] mx-auto pt-16 flex relative bg-white dark:bg-gray-900">
+  <div class="max-w-[1440px] mx-auto pt-16 flex relative bg-gray-50 dark:bg-black">
     <Header />
     <Sidebar />
     <Feed />
