@@ -22,11 +22,12 @@
           <div class="text-center sm:text-left flex-1">
             <div class="flex justify-between items-center">
               <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">{{ profile.username }}</h1>
-              <font-awesome-icon 
-                icon="gear" 
-                class="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer" 
-                @click="toggleSettings" 
-              />
+              <button 
+              class="h-9 px-5 text-sm font-medium rounded-md border border-indigo-600 text-indigo-600 dark:text-white dark:bg-indigo-600 hover:bg-indigo-600 hover:text-white dark:hover:bg-gray-800 dark:hover:text-white" 
+                @click="toggleSettings"
+              >
+                <span>Edit Profile</span>
+              </button>
             </div>
             <p class="text-sm text-gray-500 dark:text-gray-400">{{ profile.role }}</p>
             <div class="flex gap-4 mt-2">
@@ -37,14 +38,18 @@
         </div>
       </div>
 
+      <!-- Accessibility Link -->
+      <div class="mb-4">
+        <a href="/profile/accessibility" class="text-indigo-600 hover:underline dark:text-indigo-400">Learn more about accessibility</a>
+      </div>
+
       <!-- Settings Modal (Overlay) -->
       <div v-if="showSettings" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="bg-white dark:bg-neutral-900 rounded-xl p-6 w-full max-w-lg shadow-lg">
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Settings</h2>
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Edit Profile</h2>
             <font-awesome-icon icon="times" class="cursor-pointer" @click="toggleSettings" />
           </div>
-          <!-- Insert your provided settings content here -->
           <form @submit.prevent="saveAccountSettings" class="space-y-4">
             <div>
               <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
@@ -120,17 +125,29 @@
           </div>
         </div>
 
-        <!-- Stats -->
+        <!-- Enhanced Stats -->
         <div v-if="activeTab === 'Stats'" class="bg-white dark:bg-neutral-900 rounded-xl p-6 shadow-sm">
           <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Stats</h2>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="text-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ profile.stats.streams }}</p>
               <p class="text-sm text-gray-500 dark:text-gray-400">Streams</p>
+              <progress class="w-full h-2 bg-indigo-200 rounded" :value="profile.stats.streams" :max="500000"></progress>
             </div>
             <div class="text-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ profile.stats.likes }}</p>
               <p class="text-sm text-gray-500 dark:text-gray-400">Likes</p>
+              <progress class="w-full h-2 bg-indigo-200 rounded" :value="profile.stats.likes" :max="20000"></progress>
+            </div>
+            <div class="text-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ profile.stats.comments }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Comments</p>
+              <progress class="w-full h-2 bg-indigo-200 rounded" :value="profile.stats.comments" :max="1000"></progress>
+            </div>
+            <div class="text-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ profile.stats.shares }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Shares</p>
+              <progress class="w-full h-2 bg-indigo-200 rounded" :value="profile.stats.shares" :max="500"></progress>
             </div>
           </div>
         </div>
@@ -179,6 +196,8 @@ const profile = reactive({
   stats: {
     streams: 250000,
     likes: 18000,
+    comments: 500,
+    shares: 300,
   },
   posts: [
     { id: 1, content: 'New track dropping soon! #MusicLife', date: 'Mar 20, 2025' },

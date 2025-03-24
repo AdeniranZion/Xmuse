@@ -18,14 +18,19 @@ export const useAppStore = defineStore('app', {
         { name: 'Collaborations', icon: 'fas fa-users', path: '/collaborations', active: false},
         { name: 'Analytics', icon: 'fas fa-chart-line', path: '/analytics' ,active: false},
         { name: 'Library', icon: 'fas fa-music', path: '/library' ,active: false},
-        { name: "Communities", icon: "fas fa-globe", path: '/communities', active: false},
-      {
-        name: "Profile",
-        icon: "fas fa-user",
-        // action: () => (currentView.value = "profile"),
-        path: '/profile',
-        active: false
-      },
+        { name: "Communities", icon: "fas fa-user-group", path: '/communities', active: false},
+        {
+            name: "Messages",
+            icon: "fas fa-envelope",
+            path: '/messages',
+            active: false
+        },
+        {
+            name: "Profile",
+            icon: "fas fa-user",
+            path: '/profile',
+            active: false
+        },
     ],
     stories: [
       { id: 1, name: 'Sarah Mills', image: 'https://public.readdy.ai/ai/img_res/06bcabd59af3b294d4c4d19f0e0d9a33.jpg' },
@@ -45,10 +50,10 @@ export const useAppStore = defineStore('app', {
         verified: true,
         handle: "@laurathompson",
         stats: {
-          replies: "156",
-          reposts: "2.4K",
-          likes: "12,000",
-          views: "128K",
+          replies: 156,
+          reposts: 2400,
+          likes: 12000,
+          views: 128000,
         },
         showComments: false,
         isLiked: false,
@@ -70,13 +75,13 @@ export const useAppStore = defineStore('app', {
         time: '4h',
         content: 'Looking for a vocalist for my upcoming EDM track. DM if interested!',
         isCollaboration: true,
-        likes: '123',
+        likes: 123,
         handle: "@marcusrodriguez",
         stats: {
-          replies: "234",
-          reposts: "3.1K",
-          likes: "15.2K",
-          views: "156K",
+          replies: 234,
+          reposts: 3100,
+          likes: 15200,
+          views: 156000,
         },
         comments: [],
         communityId: 2,
@@ -91,14 +96,14 @@ export const useAppStore = defineStore('app', {
           "Thrilled to announce my collaboration with @SoundWave Studios! New album dropping next month 🎸✨ #NewChapter",
         trackImage:
           "https://public.readdy.ai/ai/img_res/93da2664063469712afa77289371ea27.jpg",
-        likes: "342",
+        likes: 342,
         handle: "@isabellamartinez",
         comments: [],
         stats: {
-          replies: "89",
-          reposts: "1.2K",
-          likes: "5.6K",
-          views: "82K",
+          replies: 89,
+          reposts: 1200,
+          likes: 5600,
+          views: 82000,
         },
         communityId: 3,
       },
@@ -112,15 +117,15 @@ export const useAppStore = defineStore('app', {
           "Just wrapped up mixing for @KateWilson's upcoming single. This one's going to be epic! 🎧 #MusicProducer",
         trackImage:
           "https://public.readdy.ai/ai/img_res/1976e6591d1ee13ba85fdce5c619d733.jpg",
-        likes: "189",
+        likes: 189,
         comments: [],
         handle: "@nathanbrooks",
         verified: true,
         stats: {
-          replies: "234",
-          reposts: "3.1K",
-          likes: "15.2K",
-          views: "156K",
+          replies: 234,
+          reposts: 3100,
+          likes: 15200,
+          views: 156000,
         },
         communityId: 1,
       },
@@ -132,13 +137,13 @@ export const useAppStore = defineStore('app', {
         time: "12 hours ago",
         content:
           "Rehearsing for tomorrow's live stream performance! Join me at 8PM EST for an evening of classical fusion 🎻 #LiveMusic #Violin",
-        likes: "276",
+        likes: 276,
         comments: [],
         stats: {
-          replies: "234",
-          reposts: "3.1K",
-          likes: "15.2K",
-          views: "156K",
+          replies: 234,
+          reposts: 3100,
+          likes: 15200,
+          views: 156000,
         },
         communityId: 1,
       },
@@ -155,13 +160,13 @@ export const useAppStore = defineStore('app', {
           "https://public.readdy.ai/ai/img_res/1cee790391d1c3169c2607e37119d687.jpg",
         ctaText: "Shop Now",
         ctaLink: "#",
-        likes: "1.2K",
+        likes: 1200,
         comments: [],
         stats: {
-          replies: "234",
-          reposts: "3.1K",
-          likes: "15.2K",
-          views: "156K",
+          replies: 234,
+          reposts: 3100,
+          likes: 15200,
+          views: 156000,
         },
         communityId: 2,
       },
@@ -180,14 +185,14 @@ export const useAppStore = defineStore('app', {
         videoThumbnail:
           "https://public.readdy.ai/ai/img_res/9b3d57bd63e1255403d8630594c8a990.jpg",
         isLive: true,
-        viewers: "1.2K",
-        likes: "342",
+        viewers: 1200,
+        likes: 342,
         comments: [],
         stats: {
-          replies: "234",
-          reposts: "3.1K",
-          likes: "15.2K",
-          views: "156K",
+          replies: 234,
+          reposts: 3100,
+          likes: 15200,
+          views: 156000,
         },
         communityId: 3,
       },
@@ -202,13 +207,11 @@ export const useAppStore = defineStore('app', {
       { id: 2, name: 'Producer Workshop', date: 'March 20, 2025' , communityId: 2},
       { id: 3, name: 'Live Studio Session', date: 'March 25, 2025' , communityId: 3},
     ],
-
     challengeParticipants: [
         { id: 1, name: 'Alex Turner', avatar: 'https://public.readdy.ai/ai/img_res/da26a6109eede1b6885f8b7ad315a465.jpg' },
         { id: 2, name: 'Sophie Bennett', avatar: 'https://public.readdy.ai/ai/img_res/23f0e902e54701dc8bdac18490a02473.jpg' },
         { id: 3, name: 'Ryan Carter', avatar: 'https://public.readdy.ai/ai/img_res/06bcabd59af3b294d4c4d19f0e0d9a33.jpg' },
     ],
-
     communities: [
         {
           id: 1,
@@ -273,7 +276,7 @@ export const useAppStore = defineStore('app', {
           workshops: ['Beat Making 101 - March 28, 2025'],
           challenges: ['Freestyle Friday'],
         },
-      ],
+    ],
 
       // Add genres for filtering
     genres: ['Electronic', 'Pop', 'Hip Hop', 'Rock', 'Jazz', 'Classical'],
@@ -292,10 +295,17 @@ export const useAppStore = defineStore('app', {
   }),
 
   actions: {
+    formatNumber(value: number): string {
+      const num = Number(value) || 0; // Fallback to 0 if NaN
+      if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1).replace('.0', '')}M`;
+      if (num >= 1_000) return `${(num / 1_000).toFixed(1).replace('.0', '')}K`;
+      return num.toString();
+    },
+
     toggleDarkMode(state?: boolean) {
         this.isDarkMode = state !== undefined ? state : !this.isDarkMode;
         document.documentElement.classList.toggle('dark', this.isDarkMode);
-      },
+    },
     setCurrentView(view: string) {
       this.currentView = view;
     },
@@ -324,7 +334,7 @@ export const useAppStore = defineStore('app', {
           default:
             break;
         }
-      },
+    },
     toggleComments(postId: number) {
       const post = this.posts.find(p => p.id === postId);
       if (post) {
@@ -354,7 +364,7 @@ export const useAppStore = defineStore('app', {
           post.comments = [...post.comments, newComment];
           post.stats.replies += 1;
         }
-      },
+    },
 
       // Add actions for communities
     toggleJoinCommunity(communityId: number) {
@@ -363,31 +373,31 @@ export const useAppStore = defineStore('app', {
           community.isJoined = !community.isJoined;
           community.members += community.isJoined ? 1 : -1;
         }
-      },
-      createCommunity(community: { name: string; genre: string; description: string }) {
-        const newId = this.communities.length + 1;
-        this.communities.push({
-          id: newId,
-          name: community.name,
-          genre: community.genre,
-          members: 1,
-          description: community.description,
-          image: 'https://via.placeholder.com/150',
-          nextEvent: 'No events scheduled',
-          isJoined: true,
-          isPremium: false,
-          resources: [],
-          moderators: [],
-          rules: [],
-          memberList: [],
-          discussionTopics: [],
-          featuredArtists: [],
-          collaborationOpportunities: [],
-          liveStreams: [],
-          workshops: [],
-          challenges: [],
-        });
-      },
+    },
+    createCommunity(community: { name: string; genre: string; description: string }) {
+      const newId = this.communities.length + 1;
+      this.communities.push({
+        id: newId,
+        name: community.name,
+        genre: community.genre,
+        members: 1,
+        description: community.description,
+        image: 'https://via.placeholder.com/150',
+        nextEvent: 'No events scheduled',
+        isJoined: true,
+        isPremium: false,
+        resources: [],
+        moderators: [],
+        rules: [],
+        memberList: [],
+        discussionTopics: [],
+        featuredArtists: [],
+        collaborationOpportunities: [],
+        liveStreams: [],
+        workshops: [],
+        challenges: [],
+      });
+    },
 
     toggleNewMessagePane() {
       this.showNewMessagePane = !this.showNewMessagePane;
@@ -396,14 +406,16 @@ export const useAppStore = defineStore('app', {
     createNewMessage(content: string, recipient?: { name: string; handle: string; avatar?: string }) {
       const newMessage = {
         id: this.messages.length + 1,
-        name: recipient ? recipient.name : 'New Message',
-        handle: recipient ? recipient.handle : '@unknown',
+        name: recipient?.name || 'New Message',
+        handle: recipient?.handle || '@unknown',
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         content,
-        avatar: recipient ? recipient.avatar : 'https://public.readdy.ai/ai/img_res/default.jpg',
+        avatar: recipient?.avatar || 'https://public.readdy.ai/ai/img_res/default.jpg',
         verified: false,
       };
       this.messages.unshift(newMessage);
-    },
-  
-}});
+    }
+  }
+  }
+
+);

@@ -3,7 +3,7 @@
     <!-- <div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
     </div> -->
 
-    <div class="rounded-xl p-4 mt-0 shadow-sm bg-white dark:bg-zinc-800">
+    <div class="rounded-xl p-4 mt-0 shadow-sm bg-white dark:bg-neutral-950 border border-gray-200 dark:border-gray-800">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden">
           <img :src="store.userProfileImage" class="w-full h-full object-cover" alt="profile" />
@@ -63,7 +63,7 @@
     <!-- slate, gray, zinc, neutral, stone -->
 
     <div class="space-y-4 sm:space-y-6 mt-4">
-        <div v-for="post in store.posts" :key="post.id" class="rounded-xl p-4 shadow-sm bg-white dark:bg-neutral-950">
+        <div v-for="post in store.posts" :key="post.id" class="rounded-xl p-4 shadow-sm bg-white dark:bg-neutral-950 border border-gray-200 dark:border-gray-800">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full overflow-hidden">
               <img :src="post.userImage" class="w-full h-full object-cover" alt="profile" />
@@ -87,6 +87,13 @@
           </div>
           
   
+          <!-- <div>
+            <div v-for="post in getFormattedPosts()" :key="post.id">
+              <p>{{ post.content }}</p>
+              <p>Likes: {{ post.formattedStats.likes }} | Views: {{ post.formattedStats.views }}</p>
+            </div>
+          </div> -->
+
           <div class="flex justify-between text-gray-500 dark:text-gray-400 text-sm mt-3 mx-10">
               <button @click="store.toggleComments(post.id)" class="flex items-center gap-2" :class="{'text-blue-500 dark:text-blue-400': post.showComments, 'hover:text-blue-500 dark:hover:text-blue-400': !post.showComments}">
               <font-awesome-icon icon="comment" />
@@ -108,6 +115,54 @@
               <font-awesome-icon icon="share-alt" />
             </button>
           </div>
+          
+          <!-- <div class="flex justify-between text-gray-500 dark:text-gray-400 text-sm mt-3 mx-10">
+            <button @click="store.toggleComments(post.id)" class="flex items-center gap-2" :class="{'text-blue-500 dark:text-blue-400': post.showComments, 'hover:text-blue-500 dark:hover:text-blue-400': !post.showComments}">
+              <font-awesome-icon icon="comment" />
+              <span>{{ post.formattedStats.replies }}</span>
+            </button>
+            <button class="flex items-center gap-2 hover:text-green-500 dark:hover:text-green-400 transition-colors">
+              <font-awesome-icon icon="retweet" />
+              <span>{{ post.formattedStats.reposts }}</span>
+            </button>
+            <button @click="store.toggleLike(post.id)" class="flex items-center gap-2" :class="{'text-red-500 dark:text-red-400': post.isLiked, 'hover:text-red-500 dark:hover:text-red-400': !post.isLiked}">
+              <font-awesome-icon icon="heart" />
+              <span>{{ post.formattedStats.likes }}</span>
+            </button>
+            <button class="flex items-center gap-2 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+              <font-awesome-icon icon="chart-bar" />
+              <span>{{ post.formattedStats.views }}</span>
+            </button>
+            <button class="flex items-center hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+              <font-awesome-icon icon="share-alt" />
+            </button>
+          </div> -->
+
+
+          <!-- <div v-for="post in getFormattedPosts()" :key="post.id">
+      <div class="flex justify-between text-gray-500 dark:text-gray-400 text-sm mt-3 mx-10">
+        <button @click="store.toggleComments(post.id)" class="flex items-center gap-2" :class="{'text-blue-500 dark:text-blue-400': post.showComments, 'hover:text-blue-500 dark:hover:text-blue-400': !post.showComments}">
+          <font-awesome-icon icon="comment" />
+          <span>{{ post.formattedStats.replies }}</span>
+        </button>
+        <button class="flex items-center gap-2 hover:text-green-500 dark:hover:text-green-400 transition-colors">
+          <font-awesome-icon icon="retweet" />
+          <span>{{ post.formattedStats.reposts }}</span>
+        </button>
+        <button @click="store.toggleLike(post.id)" class="flex items-center gap-2" :class="{'text-red-500 dark:text-red-400': post.isLiked, 'hover:text-red-500 dark:hover:text-red-400': !post.isLiked}">
+          <font-awesome-icon icon="heart" />
+          <span>{{ post.formattedStats.likes }}</span>
+        </button>
+        <button class="flex items-center gap-2 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+          <font-awesome-icon icon="chart-bar" />
+          <span>{{ post.formattedStats.views }}</span>
+        </button>
+        <button class="flex items-center hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+          <font-awesome-icon icon="share-alt" />
+        </button>
+      </div>
+      </div> -->
+
           <!-- Comments Section -->
           <div v-if="post.showComments" class="mt-4 border-t border-gray-200 dark:border-gray-600 pt-4 mx-10">
                   <p class="text-sm text-gray-600 dark:text-gray-400">Comments ({{ post.stats.replies }})</p>
@@ -148,7 +203,8 @@
   import { useAppStore } from '../store';
   
   const store = useAppStore();
-  
+
+  const posts = store.posts; // Assuming posts come from store
   // Reactive object to store new comment input for each post
   const newComment = ref<{ [key: number]: string }>({});
   
@@ -158,6 +214,23 @@
       newComment.value[postId] = ''; // Clear the input after submission
     }
   };
-  </script>
 
+  const formatNumber = (value: number): string => {
+  const num = Number(value) || 0;
+  if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1).replace('.0', '')}M`;
+  if (num >= 1_000) return `${(num / 1_000).toFixed(1).replace('.0', '')}K`;
+  return num.toString();
+};
 
+const getFormattedPosts = () => {
+  return store.posts.map(post => ({
+    ...post,
+    formattedStats: {
+      replies: formatNumber(post.stats.replies),
+      reposts: formatNumber(post.stats.reposts),
+      likes: formatNumber(post.stats.likes),
+      views: formatNumber(post.stats.views),
+    },
+  }));
+};
+</script>

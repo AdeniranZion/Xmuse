@@ -6,6 +6,7 @@ import Library from '../views/Library.vue';
 import CommunityDetail from '../views/CommunityDetail.vue';
 import Messages from '../views/Messages.vue';
 import Events from '../views/Events.vue';
+import Accessibility from '../views/Accessibility.vue';
 
 
 // Placeholder views for other routes (create these files if needed)
@@ -30,7 +31,8 @@ const routes = [
   { path: '/search', name: 'Search', component: Search },
   { path: '/notifications', name: 'Notifications', component: NotificationsPage },
   { path: '/messages', name: 'Messages', component: Messages },
-  { path: '/events', name: 'Events', component: Events}
+  { path: '/events', name: 'Events', component: Events},
+  { path: '/profile/accessibility', name: 'Accessibility', component: Accessibility}
   // { path: '/studio', name: 'Studio', component: Studio },
   // { path: '/events', name: 'Events', component: Events },
   // { path: '/collaborations', name: 'Collaborations', component: Collaborations },
